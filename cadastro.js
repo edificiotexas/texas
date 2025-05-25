@@ -12,7 +12,7 @@ document.getElementById("cadastroForm").addEventListener("submit", async (e) => 
     console.log("Dados sendo enviados:", morador); // Para debug
 
     try {
-        const response = await fetch("http://localhost:8080/api/auth/cadastrar", {
+        const response = await fetch("https://condominio-cc5u.onrender.com/api/auth/cadastrar", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",

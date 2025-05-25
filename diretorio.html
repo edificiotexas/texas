@@ -1,0 +1,24 @@
+<!-- diretorio.html -->
+<div class="container">
+    <h1>👥 Diretório de Moradores</h1>
+    <input type="text" id="busca" placeholder="Buscar por nome...">
+    <div id="lista-moradores"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const response = await fetch("http://localhost:8080/api/moradores");
+        const moradores = await response.json();
+        
+        const lista = document.getElementById("lista-moradores");
+        moradores.forEach(morador => {
+            lista.innerHTML += `
+                <div class="morador-card">
+                    <h3>${morador.nome}</h3>
+                    <p>Apartamento ${morador.apartamento} - Bloco ${morador.bloco}</p>
+                    ${morador.contato ? `<small>Contato: ${morador.contato}</small>` : ''}
+                </div>
+            `;
+        });
+    });
+</script>

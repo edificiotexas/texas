@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Condomínio Texas Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos específicos para esta tela */
+        .feature-card {
+            background: white;
+            border-left: 4px solid #2c3e50;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu movido para dentro do body -->
+    <div class="menu">
+        <a href="texas-connect.html">🏠 Início</a>
+        <a href="avisos.html">📌 Avisos</a>
+        <a href="agenda.html">📅 Agenda</a>
+        <a href="diretorio.html">👥 Diretório</a>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Restante do conteúdo -->
+    </div>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Bem-vindo, <span id="nomeMorador"></span>!</h1>
+            <p>Seu portal central para ficar conectado.</p>
+        </header>
+        <!-- Restante do conteúdo -->
+    </div>
+
+    <script>
+        // Verificação de login
+        document.addEventListener("DOMContentLoaded", () => {
+            const morador = JSON.parse(localStorage.getItem("morador"));
+            if (!morador) {
+                window.location.href = "index.html";
+            } else {
+                console.log("Morador logado:", morador);
+                // Opcional: Exibir dados do morador na tela
+                document.getElementById("nomeMorador").textContent = morador.nome;
+            }
+        });
+
+        function carregarAvisos() {
+            window.location.href = "avisos.html";
+        }
+
+        function carregarAgenda() {
+            window.location.href = "agenda.html";
+        }
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("morador");
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

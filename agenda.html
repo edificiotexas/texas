@@ -1,0 +1,33 @@
+<!-- agenda.html -->
+ 
+<div class="container">
+    <h1>📅 Agenda de Recursos</h1>
+    <form id="form-reserva">
+        <select id="recurso" required>
+            <option value="">Selecione um recurso</option>
+            <option value="salao">Salão de Festas</option>
+            <option value="churrasqueira">Churrasqueira</option>
+        </select>
+        <input type="date" id="data" required>
+        <button type="submit">Reservar</button>
+    </form>
+    <div id="reservas-list"></div>
+</div>
+
+<script>
+    document.getElementById("form-reserva").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const reserva = {
+            recurso: document.getElementById("recurso").value,
+            data: document.getElementById("data").value,
+            moradorId: JSON.parse(localStorage.getItem("morador")).id
+        };
+
+        await fetch("http://localhost:8080/api/reservas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(reserva)
+        });
+        alert("Reserva solicitada com sucesso!");
+    });
+</script>

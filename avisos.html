@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Quadro de Avisos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="texas-connect.html">🏠 Início</a>
+        <a href="avisos.html">📌 Avisos</a>
+        <a href="agenda.html">📅 Agenda</a>
+        <a href="diretorio.html">👥 Diretório</a>
+    </div>
+
+    <div class="container">
+        <h1>Cadastrar Novo Aviso</h1>
+        
+        <form id="formAviso">
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="conteudo">Conteúdo:</label>
+                <textarea id="conteudo" rows="4" required></textarea>
+            </div>
+            
+            <button type="submit">Publicar Aviso</button>
+        </form>
+        
+        <div id="listaAvisos" class="avisos-lista"></div>
+    </div>
+
+    <div id="listaAvisos" class="avisos-lista"></div>
+
+<!-- Modal para Edição -->
+<div id="modalEdicao" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Aviso</h2>
+        <form id="formEdicao">
+            <input type="hidden" id="editarId">
+            <div class="form-group">
+                <label for="editarTitulo">Título:</label>
+                <input type="text" id="editarTitulo" required>
+            </div>
+            <div class="form-group">
+                <label for="editarConteudo">Conteúdo:</label>
+                <textarea id="editarConteudo" rows="4" required></textarea>
+            </div>
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</div>
+
+    <script src="avisos.js"></script>
+</body>
+</html>

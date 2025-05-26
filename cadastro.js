@@ -6,37 +6,34 @@ document.getElementById("cadastroForm").addEventListener("submit", async (e) => 
         apartamento: document.getElementById("apartamento").value,
         bloco: document.getElementById("bloco").value,
         senha: document.getElementById("senha").value,
-        contato: document.getElementById("contato").value || "" // Campo opcional
+        contato: document.getElementById("contato").value || null
     };
-
-    console.log("Dados sendo enviados:", morador); // Para debug
 
     try {
         const response = await fetch("https://condominio-cc5u.onrender.com/api/auth/cadastrar", {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(morador)
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(morador),
         });
 
         const data = await response.json();
-        console.log("Resposta do servidor:", data); // Para debug
-
+        
         if (response.ok) {
-            document.getElementById("message").textContent = 
-                `Cadastro realizado! Seu login é: ${data.login}`;
+            document.getElementById("message").textContent = "Cadastro realizado com sucesso!";
             document.getElementById("message").style.color = "green";
+            // Limpa o formulário
+            document.getElementById("cadastroForm").reset();
+            // Redireciona após 2 segundos
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
         } else {
-            document.getElementById("message").textContent = 
-                data.message || "Erro ao cadastrar. Verifique os dados.";
+            document.getElementById("message").textContent = data.message || "Erro no cadastro.";
             document.getElementById("message").style.color = "red";
         }
     } catch (error) {
-        console.error("Erro na requisição:", error); // Log detalhado
-        document.getElementById("message").textContent = 
-            "Erro ao conectar ao servidor. Verifique o console para detalhes.";
+        console.error("Erro:", error);
+        document.getElementById("message").textContent = "Erro ao conectar ao servidor.";
         document.getElementById("message").style.color = "red";
     }
 });

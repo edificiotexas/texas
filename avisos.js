@@ -65,7 +65,7 @@ async function carregarAvisos() {
 }
 
 function carregarAvisos() {
-    fetch("http://localhost:8080/api/avisos")
+    fetch("https://condominio-cc5u.onrender.com/api/avisos")
         .then(response => response.json())
         .then(avisos => {
             const lista = document.getElementById("listaAvisos");
@@ -109,7 +109,7 @@ document.getElementById("formEdicao").addEventListener("submit", function(e) {
         conteudo: document.getElementById("editarConteudo").value
     };
 
-    fetch(`http://localhost:8080/api/avisos/${avisoAtualizado.id}`, {
+    fetch(`https://condominio-cc5u.onrender.com/api/avisos/${avisoAtualizado.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -128,7 +128,7 @@ document.getElementById("formEdicao").addEventListener("submit", function(e) {
 
 function removerAviso(id) {
     if (confirm("Tem certeza que deseja remover este aviso?")) {
-        fetch(`http://localhost:8080/api/avisos/${id}`, {
+        fetch(`https://condominio-cc5u.onrender.com/api/avisos/${id}`, {
             method: "DELETE",
         })
         .then(response => {

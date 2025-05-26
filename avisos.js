@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function carregarAvisos() {
     try {
-        const response = await fetch("http://localhost:8080/api/avisos");
+        const response = await fetch("https://condominio-cc5u.onrender.com/api/avisos");
         const avisos = await response.json();
         
         const lista = document.getElementById("listaAvisos");

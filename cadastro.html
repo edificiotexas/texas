@@ -6,33 +6,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="decorative-element"></div>
+    <div class="decorative-element"></div>
+    
     <div class="login-container">
-        <h1>Cadastro de Morador</h1>
+        <h1>Crie sua Conta</h1>
         <form id="cadastroForm">
             <div class="form-group">
-                <label for="nome">Nome Completo:</label>
-                <input type="text" id="nome" required>
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" required placeholder="Seu nome completo">
             </div>
             <div class="form-group">
-                <label for="apartamento">Apartamento:</label>
-                <input type="text" id="apartamento" required>
+                <label for="apartamento">Apartamento</label>
+                <input type="text" id="apartamento" required placeholder="Ex: 101A">
             </div>
             <div class="form-group">
-                <label for="bloco">Bloco:</label>
-                <input type="text" id="bloco" required>
+                <label for="bloco">Bloco</label>
+                <input type="text" id="bloco" required placeholder="Letra do bloco">
             </div>
             <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" required>
+                <label for="senha">Senha (mínimo 6 caracteres)</label>
+                <input type="password" id="senha" required placeholder="Crie uma senha">
             </div>
             <div class="form-group">
-                <label for="contato">Contato (Opcional):</label>
-                <input type="text" id="contato">
+                <label for="contato">Telefone (Opcional)</label>
+                <input type="text" id="contato" placeholder="(00) 00000-0000">
             </div>
             <button type="submit">Cadastrar</button>
         </form>
         <p id="message"></p>
-        <p>Já tem cadastro? <a href="index.html">Faça login</a></p>
+        <p class="register-link">Já tem conta? <a href="index.html">Faça login</a></p>
     </div>
     <script src="cadastro.js"></script>
 </body>

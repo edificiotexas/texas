@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Condomínio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-container" id="loginForm">
+            <h1>Login</h1>
+            <div class="form-group">
+                <label for="login">Apartamento</label>
+                <input type="text" id="login" placeholder="Ex: 101A">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Sua senha">
+            </div>
+            <button onclick="fazerLogin()">Entrar</button>
+            <p class="toggle-form">Não tem conta? <a href="#" onclick="mostrarRegistro()">Registre-se</a></p>
+        </div>
+
+        <div class="form-container hidden" id="registroForm">
+            <h1>Registro</h1>
+            <div class="form-group">
+                <label for="regNome">Nome Completo</label>
+                <input type="text" id="regNome" placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+                <label for="regApto">Apartamento</label>
+                <input type="text" id="regApto" placeholder="Ex: 101A">
+            </div>
+            <div class="form-group">
+                <label for="regBloco">Bloco</label>
+                <input type="text" id="regBloco" placeholder="Letra do bloco">
+            </div>
+            <div class="form-group">
+                <label for="regSenha">Senha</label>
+                <input type="password" id="regSenha" placeholder="Crie uma senha">
+            </div>
+            <button onclick="fazerRegistro()">Registrar</button>
+            <p class="toggle-form">Já tem conta? <a href="#" onclick="mostrarLogin()">Faça login</a></p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+.header {
+    background-color: var(--verde);
+    color: var(--branco);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header button {
+    background-color: var(--branco);
+    color: var(--verde);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    background-color: var(--branco);
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--cinza-escuro);
+}
+
+.menu a.active {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.main-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: var(--branco);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--verde);
+    margin-bottom: 10px;
+}
+
+/* Estilos específicos para avisos */
+.avisos-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.novo-aviso {
+    background: var(--branco);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.lista-avisos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.aviso {
+    background: var(--branco);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.aviso h3 {
+    color: var(--verde);
+    margin-bottom: 5px;
+}
+
+.aviso .data {
+    color: var(--cinza-escuro);
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.aviso .mensagem {
+    line-height: 1.5;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+/* Estilos específicos para moradores */
+.moradores-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.filtros {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    background: var(--branco);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filtros .form-group {
+    margin-bottom: 0;
+}
+
+.lista-moradores {
+    background: var(--branco);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.morador {
+    padding: 10px 0;
+}
+
+.morador p {
+    margin-bottom: 5px;
+}
+
+.morador hr {
+    border: none;
+    border-top: 1px solid var(--cinza);
+    margin: 10px 0;
+}
+
+.status {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.status.pendente {
+    color: #e67e22;
+}
+
+.status.confirmado {
+    color: var(--verde);
+}
+
+.status.cancelado {
+    color: #e74c3c;
+}

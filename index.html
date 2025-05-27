@@ -3,29 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestão de Condomínio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Início - Condomínio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-    <div class="decorative-element"></div>
-    <div class="decorative-element"></div>
-    
-    <div class="login-container">
-        <h1>Gestão de Condomínio</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="login">Login (Ex: 103A)</label>
-                <input type="text" id="login" required placeholder="Digite seu login">
+    <header class="header">
+        <h1>Condomínio Texas Connect</h1>
+        <button onclick="sair()">Sair</button>
+    </header>
+
+    <nav class="menu">
+        <a href="index.html" class="active">Início</a>
+        <a href="avisos.html">Avisos</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="moradores.html">Moradores</a>
+    </nav>
+
+    <main class="main-content">
+        <h2>Bem-vindo, <span id="nomeUsuario"></span></h2>
+        <div class="cards">
+            <div class="card" onclick="window.location.href='avisos.html'">
+                <h3>Avisos</h3>
+                <p>Veja os últimos comunicados</p>
             </div>
-            <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" required placeholder="Digite sua senha">
+            <div class="card" onclick="window.location.href='agenda.html'">
+                <h3>Agenda</h3>
+                <p>Faça suas reservas</p>
             </div>
-            <button type="submit">Entrar</button>
-        </form>
-        <p id="message"></p>
-        <p class="register-link">Novo por aqui? <a href="cadastro.html">Crie sua conta</a></p>
-    </div>
-    <script src="script.js"></script>
+            <div class="card" onclick="window.location.href='moradores.html'">
+                <h3>Moradores</h3>
+                <p>Relação de moradores</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Verificar se está logado
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        if (!usuario) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('nomeUsuario').textContent = usuario.nome;
+        }
+
+        function sair() {
+            localStorage.removeItem('usuario');
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>

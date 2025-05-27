@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moradores - Condomínio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Relação de Moradores</h1>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+    </header>
+
+    <nav class="menu">
+        <a href="index.html">Início</a>
+        <a href="avisos.html">Avisos</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="moradores.html" class="active">Moradores</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="moradores-container">
+            <h2>Lista de Moradores</h2>
+            
+            <div class="filtros">
+                <div class="form-group">
+                    <label for="busca">Buscar:</label>
+                    <input type="text" id="busca" placeholder="Nome ou apartamento">
+                </div>
+                <div class="form-group">
+                    <label for="bloco">Bloco:</label>
+                    <select id="bloco">
+                        <option value="">Todos</option>
+                        <option value="A">Bloco A</option>
+                        <option value="B">Bloco B</option>
+                        <option value="C">Bloco C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="listaMoradores" class="lista-moradores">
+                <!-- Moradores serão carregados aqui via JavaScript -->
+                <p>Carregando moradores...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/moradores.js"></script>
+</body>
+</html>

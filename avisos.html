@@ -2,59 +2,51 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Quadro de Avisos</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisos - Condomínio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-    <div class="menu">
-        <a href="texas-connect.html">🏠 Início</a>
-        <a href="avisos.html">📌 Avisos</a>
-        <a href="agenda.html">📅 Agenda</a>
-        <a href="diretorio.html">👥 Diretório</a>
-    </div>
+    <header class="header">
+        <h1>Avisos do Condomínio</h1>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+    </header>
 
-    <div class="container">
-        <h1>Cadastrar Novo Aviso</h1>
-        
-        <form id="formAviso">
-            <div class="form-group">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" required>
-            </div>
+    <nav class="menu">
+        <a href="index.html">Início</a>
+        <a href="avisos.html" class="active">Avisos</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="moradores.html">Moradores</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="avisos-container">
+            <h2>Últimos Avisos</h2>
             
-            <div class="form-group">
-                <label for="conteudo">Conteúdo:</label>
-                <textarea id="conteudo" rows="4" required></textarea>
+            <div class="novo-aviso">
+                <h3>Adicionar Novo Aviso</h3>
+                <form id="formAviso">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" rows="4" required></textarea>
+                    </div>
+                    <button type="submit">Publicar Aviso</button>
+                </form>
             </div>
-            
-            <button type="submit">Publicar Aviso</button>
-        </form>
-        
-        <div id="listaAvisos" class="avisos-lista"></div>
-    </div>
 
-    <div id="listaAvisos" class="avisos-lista"></div>
-
-<!-- Modal para Edição -->
-<div id="modalEdicao" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Editar Aviso</h2>
-        <form id="formEdicao">
-            <input type="hidden" id="editarId">
-            <div class="form-group">
-                <label for="editarTitulo">Título:</label>
-                <input type="text" id="editarTitulo" required>
+            <div id="listaAvisos" class="lista-avisos">
+                <!-- Avisos serão carregados aqui via JavaScript -->
+                <p>Carregando avisos...</p>
             </div>
-            <div class="form-group">
-                <label for="editarConteudo">Conteúdo:</label>
-                <textarea id="editarConteudo" rows="4" required></textarea>
-            </div>
-            <button type="submit">Salvar Alterações</button>
-        </form>
-    </div>
-</div>
+        </div>
+    </main>
 
-    <script src="avisos.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/avisos.js"></script>
 </body>
 </html>

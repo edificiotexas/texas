@@ -1,33 +1,69 @@
-<!-- agenda.html -->
- 
-<div class="container">
-    <h1>📅 Agenda de Recursos</h1>
-    <form id="form-reserva">
-        <select id="recurso" required>
-            <option value="">Selecione um recurso</option>
-            <option value="salao">Salão de Festas</option>
-            <option value="churrasqueira">Churrasqueira</option>
-        </select>
-        <input type="date" id="data" required>
-        <button type="submit">Reservar</button>
-    </form>
-    <div id="reservas-list"></div>
-</div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - Condomínio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Agenda do Condomínio</h1>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+    </header>
 
-<script>
-    document.getElementById("form-reserva").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const reserva = {
-            recurso: document.getElementById("recurso").value,
-            data: document.getElementById("data").value,
-            moradorId: JSON.parse(localStorage.getItem("morador")).id
-        };
+    <nav class="menu">
+        <a href="index.html">Início</a>
+        <a href="avisos.html">Avisos</a>
+        <a href="agenda.html" class="active">Agenda</a>
+        <a href="moradores.html">Moradores</a>
+    </nav>
 
-        await fetch("http://localhost:8080/api/reservas", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(reserva)
-        });
-        alert("Reserva solicitada com sucesso!");
-    });
-</script>
+    <main class="main-content">
+        <div class="agenda-container">
+            <h2>Reservas</h2>
+            
+            <div class="nova-reserva">
+                <h3>Fazer Nova Reserva</h3>
+                <form id="formReserva">
+                    <div class="form-group">
+                        <label for="espaco">Espaço</label>
+                        <select id="espaco" required>
+                            <option value="">Selecione...</option>
+                            <option value="salao">Salão de Festas</option>
+                            <option value="churrasqueira">Churrasqueira</option>
+                            <option value="piscina">Piscina</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" id="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horario">Horário</label>
+                        <select id="horario" required>
+                            <option value="">Selecione...</option>
+                            <option value="08:00-10:00">08:00 - 10:00</option>
+                            <option value="10:00-12:00">10:00 - 12:00</option>
+                            <option value="14:00-16:00">14:00 - 16:00</option>
+                            <option value="16:00-18:00">16:00 - 18:00</option>
+                            <option value="19:00-22:00">19:00 - 22:00</option>
+                        </select>
+                    </div>
+                    <button type="submit">Reservar</button>
+                </form>
+            </div>
+
+            <div id="minhasReservas" class="lista-reservas">
+                <h3>Minhas Reservas</h3>
+                <!-- Reservas serão carregadas aqui via JavaScript -->
+                <p>Carregando reservas...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/agenda.js"></script>
+</body>
+</html>

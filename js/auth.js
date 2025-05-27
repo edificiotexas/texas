@@ -47,7 +47,7 @@ async function fazerRegistro() {
     };
     
     try {
-        const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/registro', {
+        const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/cadastrar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

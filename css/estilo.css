@@ -1,10 +1,14 @@
 /* Estilos gerais */
 :root {
-    --verde: #2e7d32;
-    --verde-claro: #4caf50;
-    --cinza: #f5f5f5;
-    --cinza-escuro: #333;
+    --verde-primario: #2e7d32;       /* Verde mais escuro para elementos principais */
+    --verde-secundario: #388e3c;     /* Verde médio para hover e destaques */
+    --verde-claro: #81c784;          /* Verde claro para fundos e detalhes */
     --branco: #ffffff;
+    --cinza-claro: #f5f5f5;
+    --cinza-medio: #e0e0e0;
+    --cinza-escuro: #424242;
+    --sombra: 0 4px 6px rgba(0,0,0,0.1);
+    --borda-radius: 8px;
 }
 
 * {
@@ -23,29 +27,48 @@ body {
     display: none !important;
 }
 
-/* Adicione ao final do arquivo estilo.css */
 .vaga-visitante-info {
-    background-color: var(--branco);
+    background: var(--branco);
     padding: 1.5rem;
+    border-radius: var(--borda-radius);
+    box-shadow: var(--sombra);
     margin: 1.5rem 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.vaga-visitante-info h3 {
-    color: var(--verde);
-    margin-bottom: 1rem;
-}
-
-#vagaVisitanteInfo p {
-    margin: 0.5rem 0;
+    border-left: 4px solid var(--verde-primario);
 }
 
 .vaga-disponivel {
-    color: var(--verde);
-    font-weight: bold;
+    color: var(--verde-primario);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vaga-disponivel:before {
+    content: "✓";
+    font-size: 1.25rem;
 }
 
 .vaga-indisponivel {
     color: #d32f2f;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vaga-indisponivel:before {
+    content: "✗";
+    font-size: 1.25rem;
+}
+
+.vaga-proxima {
+    display: inline-block;
+    background-color: var(--verde-claro);
+    color: var(--verde-primario);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
 }

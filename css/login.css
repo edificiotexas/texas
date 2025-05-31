@@ -1,24 +1,69 @@
+/* Estilos base */
+:root {
+    --verde-primario: #2e7d32;
+    --verde-secundario: #388e3c;
+    --branco: #ffffff;
+    --cinza-claro: #f5f5f5;
+    --cinza-medio: #e0e0e0;
+    --cinza-escuro: #424242;
+    --sombra: 0 4px 20px rgba(0,0,0,0.1);
+    --borda-radius: 12px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--cinza-claro);
+}
+
+/* Layout principal */
+.login-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.login-image {
+    flex: 1;
+    background: url('../img/edificio-texas.jpg') center/cover no-repeat;
+    display: none; /* Escondido em mobile */
+}
+
 .login-container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 20px;
+    padding: 2rem;
 }
 
+/* Container do formulário */
 .form-container {
     background: var(--branco);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: var(--borda-radius);
     box-shadow: var(--sombra);
-    max-width: 500px;
-    margin: 2rem auto;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
 }
 
-.form-container h1 {
-    color: var(--verde);
-    margin-bottom: 20px;
+.logo {
     text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo img {
+    height: 60px;
+}
+
+/* Elementos do formulário */
+.form-content h1 {
+    color: var(--verde-primario);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .form-group {
@@ -29,84 +74,96 @@
     display: block;
     margin-bottom: 0.5rem;
     color: var(--cinza-escuro);
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
-.form-group input, 
-.form-group select, 
-.form-group textarea {
+.form-group input {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.85rem 1rem;
     border: 1px solid var(--cinza-medio);
-    border-radius: var(--borda-radius);
-    transition: border 0.3s ease;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 .form-group input:focus {
-    border-color: var(--verde-secundario);
+    border-color: var(--verde-primario);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
 }
 
-button, .btn {
+.form-group input::placeholder {
+    color: #a0a0a0;
+}
+
+/* Botão */
+button {
+    width: 100%;
+    padding: 1rem;
     background-color: var(--verde-primario);
     color: var(--branco);
-    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: var(--borda-radius);
-    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: 500;
+    cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-button:hover, .btn:hover {
+button:hover {
     background-color: var(--verde-secundario);
     transform: translateY(-2px);
 }
 
-.btn-outline {
-    background-color: transparent;
-    border: 1px solid var(--verde-primario);
-    color: var(--verde-primario);
-}
-
-.btn-outline:hover {
-    background-color: var(--verde-primario);
-    color: var(--branco);
-}
-
+/* Link de alternância */
 .toggle-form {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
 }
 
 .toggle-form a {
-    color: var(--verde);
+    color: var(--verde-primario);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .toggle-form a:hover {
     text-decoration: underline;
 }
 
-.error-message {
-    color: red;
-    font-size: 0.8em;
-    display: none;
+/* Efeito de overlay na imagem */
+.login-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.8) 0%, rgba(56, 142, 60, 0.6) 100%);
 }
 
-.logo-wrapper {
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
+/* Responsividade */
+@media (min-width: 768px) {
+    .login-image {
+        display: block;
+        position: relative;
+    }
+    
+    .form-container {
+        padding: 3rem;
+    }
 }
 
-.logo-img {
-    max-width: 180px;
-    height: auto;
+@media (min-width: 1024px) {
+    .login-wrapper {
+        flex-direction: row;
+    }
+    
+    .form-container {
+        margin-right: 5%;
+    }
 }

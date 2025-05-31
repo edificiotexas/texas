@@ -1,0 +1,55 @@
+/* Arquivo: css/vagas.css */
+.info-vagas {
+    background-color: var(--branco);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.consulta-vaga {
+    background-color: var(--branco);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.consulta-vaga button {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.consulta-vaga button:hover {
+    background-color: var(--verde-claro);
+}
+
+.resultado {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.calendario-vagas {
+    background-color: var(--branco);
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.semana-vaga {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.semana-vaga h4 {
+    color: var(--verde);
+    margin-bottom: 0.5rem;
+}

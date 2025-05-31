@@ -16,6 +16,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+async function verificarDisponibilidade(espaco, data) {
+    try {
+        const response = await fetch(`https://seu-backend.onrender.com/api/reservas/disponibilidade?espaco=${espaco}&data=${data}`);
+        const reservas = await response.json();
+        
+        // Desabilita horários já reservados
+        const horarioSelect = document.getElementById('horario');
+        Array.from(horarioSelect.options).forEach(option => {
+            if (option.value) {
+                const jaReservado = reservas.some(r => r.horario === option.value);
+                option.disabled = jaReservado;
+                if (jaReservado) {
+                    option.text += ' (Indisponível)';
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Erro ao verificar disponibilidade:', error);
+    }
+}
+
+// Adicione listeners para quando o usuário selecionar espaço ou data
+document.getElementById('espaco').addEventListener('change', atualizarDisponibilidade);
+document.getElementById('data').addEventListener('change', atualizarDisponibilidade);
+
+async function atualizarDisponibilidade() {
+    const espaco = document.getElementById('espaco').value;
+    const data = document.getElementById('data').value;
+    
+    if (espaco && data) {
+        await verificarDisponibilidade(espaco, data);
+    }
+}
+
 async function carregarReservas() {
     try {
         const usuario = JSON.parse(localStorage.getItem('usuario'));

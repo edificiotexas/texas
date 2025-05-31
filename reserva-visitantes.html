@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas para Visitantes - Edifício Texas</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/reserva-visitantes.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Vagas para Visitantes</h1>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+    </header>
+
+    <nav class="menu">
+        <a href="index.html">Início</a>
+        <a href="avisos.html">Avisos</a>
+        <a href="reserva-visitantes.html" class="active">Visitantes</a>
+        <a href="moradores.html">Moradores</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="reserva-container">
+            <h2>Agendamento de Visitantes</h2>
+            
+            <div class="controles-reserva">
+                <div class="filtros">
+                    <label for="dataReserva">Selecione a data:</label>
+                    <input type="date" id="dataReserva" min="" required>
+                    <button id="btnBuscarVagas">Buscar Vagas</button>
+                </div>
+            </div>
+            
+            <div id="tabelaVagas" class="tabela-vagas">
+                <p>Selecione uma data para visualizar as vagas disponíveis</p>
+            </div>
+            
+            <div id="formReserva" class="form-reserva" style="display: none;">
+                <h3>Reservar Vaga</h3>
+                <form id="formDadosVisitante">
+                    <input type="hidden" id="vagaId">
+                    
+                    <div class="form-group">
+                        <label for="nomeVisitante">Nome do Visitante</label>
+                        <input type="text" id="nomeVisitante" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="documentoVisitante">Documento (RG/CPF)</label>
+                        <input type="text" id="documentoVisitante" required>
+                    </div>
+                    
+                    <div class="info-vaga">
+                        <p id="infoData"></p>
+                        <p id="infoHorario"></p>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-confirmar">Confirmar Reserva</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarReserva()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="minhasReservas" class="minhas-reservas">
+                <h3>Minhas Reservas Ativas</h3>
+                <div class="reservas-list">
+                    <p>Carregando suas reservas...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/reserva-visitantes.js"></script>
+</body>
+</html>

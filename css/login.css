@@ -98,3 +98,11 @@ button:hover, .btn:hover {
     font-size: 0.8em;
     display: none;
 }
+
+.logo-img {
+    max-width: 180px;
+    margin-bottom: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

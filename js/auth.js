@@ -1,18 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('loginForm').classList.add('active');
-    document.getElementById('registroForm').classList.remove('active');
-});
-
 // Alternar entre login e registro
 function mostrarRegistro() {
-    document.getElementById('loginForm').classList.remove('active');
+    // Atualiza botões das abas
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    document.querySelector('.tab-button:nth-child(2)').classList.add('active');
+    
+    // Atualiza conteúdo das abas
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
     document.getElementById('registroForm').classList.add('active');
 }
 
 function mostrarLogin() {
-    document.getElementById('registroForm').classList.remove('active');
+    // Atualiza botões das abas
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    document.querySelector('.tab-button:nth-child(1)').classList.add('active');
+    
+    // Atualiza conteúdo das abas
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
     document.getElementById('loginForm').classList.add('active');
 }
+
 
 // Função de login
 async function fazerLogin() {

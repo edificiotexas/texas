@@ -1,8 +1,7 @@
-/* Estilos gerais */
 :root {
-    --verde-primario: #2e7d32;       /* Verde mais escuro para elementos principais */
-    --verde-secundario: #388e3c;     /* Verde médio para hover e destaques */
-    --verde-claro: #81c784;          /* Verde claro para fundos e detalhes */
+    --verde-primario: #2e7d32;
+    --verde-secundario: #388e3c;
+    --verde-claro: #81c784;
     --branco: #ffffff;
     --cinza-claro: #f5f5f5;
     --cinza-medio: #e0e0e0;
@@ -15,11 +14,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-    background-color: var(--cinza);
+    background-color: var(--cinza-claro); /* Corrigido de --cinza para --cinza-claro */
     color: var(--cinza-escuro);
 }
 

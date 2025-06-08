@@ -1,4 +1,13 @@
-// Alternar entre login e registro
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa mostrando o formulário de login
+    mostrarLogin();
+    
+    // Configura os event listeners para verificação em tempo real
+    document.getElementById('regApto').addEventListener('blur', verificarLoginEmTempoReal);
+    document.getElementById('regBloco').addEventListener('blur', verificarLoginEmTempoReal);
+});
+
+// Alternar entre login e registro usando sistema de abas
 function mostrarRegistro() {
     // Atualiza botões das abas
     document.querySelectorAll('.tab-button').forEach(button => {
@@ -27,11 +36,16 @@ function mostrarLogin() {
     document.getElementById('loginForm').classList.add('active');
 }
 
-
 // Função de login
 async function fazerLogin() {
     const login = document.getElementById('login').value;
     const senha = document.getElementById('senha').value;
+    
+    // Validação básica
+    if (!login || !senha) {
+        alert('Por favor, preencha todos os campos');
+        return;
+    }
     
     try {
         const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/login', {
@@ -48,7 +62,7 @@ async function fazerLogin() {
             localStorage.setItem('usuario', JSON.stringify(data));
             window.location.href = 'index.html';
         } else {
-            alert(data.message || 'Erro no login');
+            alert(data.message || 'Erro no login. Verifique suas credenciais.');
         }
     } catch (error) {
         alert('Erro ao conectar com o servidor');
@@ -76,6 +90,7 @@ async function verificarLoginExistente(apartamento, bloco) {
     }
 }
 
+// Verificação em tempo real durante o registro
 function verificarLoginEmTempoReal() {
     const apartamento = document.getElementById('regApto').value;
     const bloco = document.getElementById('regBloco').value;
@@ -97,10 +112,22 @@ function verificarLoginEmTempoReal() {
 }
 
 // Função de registro
-// Modificada a função de registro para verificar se o login já existe antes de cadastradar.
 async function fazerRegistro() {
     const apartamento = document.getElementById('regApto').value;
     const bloco = document.getElementById('regBloco').value;
+    const nome = document.getElementById('regNome').value;
+    const senha = document.getElementById('regSenha').value;
+    
+    // Validação básica
+    if (!nome || !apartamento || !bloco || !senha) {
+        alert('Por favor, preencha todos os campos');
+        return;
+    }
+    
+    if (senha.length < 6) {
+        alert('A senha deve ter pelo menos 6 caracteres');
+        return;
+    }
     
     // Verificar se o login já existe
     const verificacao = await verificarLoginExistente(apartamento, bloco);
@@ -111,10 +138,10 @@ async function fazerRegistro() {
     }
 
     const usuario = {
-        nome: document.getElementById('regNome').value,
+        nome: nome,
         apartamento: apartamento,
         bloco: bloco,
-        senha: document.getElementById('regSenha').value
+        senha: senha
     };
     
     try {
@@ -130,27 +157,12 @@ async function fazerRegistro() {
         
         if (response.ok) {
             alert('Registro realizado com sucesso!');
-            mostrarLogin();
+            mostrarLogin(); // Volta para a aba de login após registro
         } else {
             alert(data.message || 'Erro no registro');
         }
     } catch (error) {
         alert('Erro ao conectar com o servidor');
         console.error(error);
-    }
-}
-
-document.getElementById('regApto').addEventListener('blur', verificarLoginEmTempoReal);
-document.getElementById('regBloco').addEventListener('blur', verificarLoginEmTempoReal);
-
-async function verificarLoginEmTempoReal() {
-    const apartamento = document.getElementById('regApto').value;
-    const bloco = document.getElementById('regBloco').value;
-    
-    if (apartamento && bloco) {
-        const verificacao = await verificarLoginExistente(apartamento, bloco);
-        if (verificacao.existe) {
-            alert('Atenção: Este apartamento/bloco já está cadastrado!');
-        }
     }
 }

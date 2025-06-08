@@ -8,45 +8,60 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-	<div class="login-wrapper">
-	        <img src="img/logo-texas.jpeg" alt="Logo do Edifício Texas" class="logo-img">
-	    </div>
-	<div class="login-container">
-        <div class="form-container" id="loginForm">
-            <h1>Login</h1>
-            <div class="form-group">
-                <label for="login">Login</label>
-                <input type="text" id="login" placeholder="Exemplo: 307B">
-				<span id="aptoError" class="error-message"></span>
+    <div class="split-screen">
+        <div class="left-panel">
+            <img src="img/Texas.png" alt="Edifício Texas" class="building-image">
+            <div class="logo-overlay">
+                <img src="img/logo-texas.jpeg" alt="Logo do Edifício Texas" class="logo-img">
             </div>
-            <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" placeholder="Digite sua senha">
-            </div>
-            <button onclick="fazerLogin()">Entrar</button>
-            <p class="toggle-form">Não tem conta? <a href="#" onclick="mostrarRegistro()">Registre-se</a></p>
         </div>
+        
+        <div class="right-panel">
+            <div class="form-container active" id="loginForm">
+                <h1>Bem-vindo ao Edifício Texas</h1>
+                <p class="subtitle">Faça login para acessar sua conta</p>
+                
+                <div class="form-group">
+                    <label for="login">Apartamento/Bloco</label>
+                    <input type="text" id="login" placeholder="Exemplo: 307B">
+                    <span id="aptoError" class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha">
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+                <button onclick="fazerLogin()">Entrar</button>
+                <p class="toggle-form">Não tem conta? <a href="#" onclick="mostrarRegistro()">Registre-se aqui</a></p>
+            </div>
 
-        <div class="form-container hidden" id="registroForm">
-            <h1>Registro</h1>
-            <div class="form-group">
-                <label for="regNome">Nome Completo</label>
-                <input type="text" id="regNome" placeholder="Seu nome">
+            <div class="form-container" id="registroForm">
+                <h1>Crie sua conta</h1>
+                <p class="subtitle">Registre-se para acessar os serviços</p>
+                
+                <div class="form-group">
+                    <label for="regNome">Nome Completo</label>
+                    <input type="text" id="regNome" placeholder="Seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="regApto">Número do Apartamento</label>
+                    <input type="text" id="regApto" placeholder="Ex: 101">
+                </div>
+                <div class="form-group">
+                    <label for="regBloco">Bloco</label>
+                    <select id="regBloco">
+                        <option value="">Selecione o bloco</option>
+                        <option value="A">Bloco A</option>
+                        <option value="B">Bloco B</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regSenha">Crie uma senha</label>
+                    <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres">
+                </div>
+                <button onclick="fazerRegistro()">Registrar</button>
+                <p class="toggle-form">Já tem conta? <a href="#" onclick="mostrarLogin()">Faça login aqui</a></p>
             </div>
-            <div class="form-group">
-                <label for="regApto">Apartamento</label>
-                <input type="text" id="regApto" placeholder="Ex: 101">
-            </div>
-            <div class="form-group">
-                <label for="regBloco">Bloco</label>
-                <input type="text" id="regBloco" placeholder="Exemplo: A / B">
-            </div>
-            <div class="form-group">
-                <label for="regSenha">Senha</label>
-                <input type="password" id="regSenha" placeholder="Crie uma senha">
-            </div>
-            <button onclick="fazerRegistro()">Registrar</button>
-            <p class="toggle-form">Já tem conta? <a href="#" onclick="mostrarLogin()">Faça login</a></p>
         </div>
     </div>
 

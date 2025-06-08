@@ -16,24 +16,46 @@ body {
     background-color: var(--cinza-claro);
 }
 
-/* Layout principal */
-.login-wrapper {
+/* Layout dividido */
+.split-screen {
     display: flex;
     min-height: 100vh;
 }
 
-.login-image {
+.left-panel {
     flex: 1;
-    background: url('../img/edificio-texas.jpg') center/cover no-repeat;
-    display: none; /* Escondido em mobile */
+    position: relative;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.8) 0%, rgba(56, 142, 60, 0.6) 100%);
+    display: none;
 }
 
-.login-container {
+.building-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+}
+
+.logo-overlay img {
+    max-width: 200px;
+    margin-bottom: 1rem;
+}
+
+.right-panel {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    background-color: var(--branco);
 }
 
 /* Container do formulário */
@@ -44,30 +66,31 @@ body {
     box-shadow: var(--sombra);
     width: 100%;
     max-width: 420px;
-    position: relative;
-    z-index: 1;
+    transition: all 0.3s ease;
+    display: none;
 }
 
-.logo {
-    text-align: center;
-    margin-bottom: 1.5rem;
+.form-container.active {
+    display: block;
 }
 
-.logo img {
-    height: 60px;
-}
-
-/* Elementos do formulário */
-.form-content h1 {
+.form-container h1 {
     color: var(--verde-primario);
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
+.subtitle {
+    color: var(--cinza-escuro);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* Elementos do formulário */
 .form-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .form-group label {
@@ -78,7 +101,8 @@ body {
     font-weight: 500;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 0.85rem 1rem;
     border: 1px solid var(--cinza-medio);
@@ -87,14 +111,24 @@ body {
     transition: all 0.3s ease;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
     border-color: var(--verde-primario);
     outline: none;
     box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
 }
 
-.form-group input::placeholder {
-    color: #a0a0a0;
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--verde-primario);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
 /* Botão */
@@ -109,7 +143,7 @@ button {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 }
 
 button:hover {
@@ -122,6 +156,7 @@ button:hover {
     text-align: center;
     margin-top: 1.5rem;
     font-size: 0.9rem;
+    color: var(--cinza-escuro);
 }
 
 .toggle-form a {
@@ -135,35 +170,30 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Efeito de overlay na imagem */
-.login-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(46, 125, 50, 0.8) 0%, rgba(56, 142, 60, 0.6) 100%);
+.error-message {
+    color: #d32f2f;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: none;
 }
 
 /* Responsividade */
 @media (min-width: 768px) {
-    .login-image {
+    .left-panel {
         display: block;
-        position: relative;
     }
     
-    .form-container {
+    .right-panel {
         padding: 3rem;
     }
 }
 
 @media (min-width: 1024px) {
-    .login-wrapper {
-        flex-direction: row;
+    .form-container {
+        padding: 3rem;
     }
     
-    .form-container {
-        margin-right: 5%;
+    .logo-overlay img {
+        max-width: 250px;
     }
 }

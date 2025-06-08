@@ -1,12 +1,17 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loginForm').classList.add('active');
+    document.getElementById('registroForm').classList.remove('active');
+});
+
 // Alternar entre login e registro
 function mostrarRegistro() {
-    document.getElementById('loginForm').classList.add('hidden');
-    document.getElementById('registroForm').classList.remove('hidden');
+    document.getElementById('loginForm').classList.remove('active');
+    document.getElementById('registroForm').classList.add('active');
 }
 
 function mostrarLogin() {
-    document.getElementById('registroForm').classList.add('hidden');
-    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('registroForm').classList.remove('active');
+    document.getElementById('loginForm').classList.add('active');
 }
 
 // Função de login

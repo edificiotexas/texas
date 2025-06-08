@@ -18,7 +18,7 @@
 }
 
 body {
-    background-color: var(--cinza-claro); /* Corrigido de --cinza para --cinza-claro */
+    background-color: var(--cinza-claro);
     color: var(--cinza-escuro);
 }
 

@@ -1,6 +1,8 @@
 /* Estilos base */
 .login-page {
-    background: linear-gradient(135deg, var(--verde-primario) 0%, var(--verde-secundario) 100%);
+    background: 
+        linear-gradient(rgba(46, 125, 50, 0.8), rgba(56, 142, 60, 0.8)),
+        url('../img/Texas.png') center/cover no-repeat;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -9,13 +11,13 @@
 }
 
 .login-container {
-    background: var(--branco);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: var(--borda-radius);
     box-shadow: var(--sombra);
     width: 100%;
     max-width: 450px;
     padding: 2rem;
-    margin: 1rem;
+    backdrop-filter: blur(2px);
 }
 
 .brand-header {

@@ -1,76 +1,79 @@
 /* Estilos base */
-.split-screen {
-    display: flex;
+.login-page {
+    background: linear-gradient(135deg, var(--verde-primario) 0%, var(--verde-secundario) 100%);
     min-height: 100vh;
-	max-height: 100vh;
-	overflow: hidden;
-    width: 100vw;
-}
-
-.left-panel {
-    flex: 1;
-	position: relative;
-	display: flex;
-	align-items: center;
-	overflow: hidden;
-	max-width: 50%;
-    background: linear-gradient(135deg, rgba(46, 125, 50, 0.8) 0%, rgba(56, 142, 60, 0.6) 100%);
-}
-
-.building-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-	object-position: center;
-	min-height: 100vh;
-	max-width: 100%;
-	max-height: 100vh;
-	width: auto;
-	height: auto;
-}
-
-.right-panel {
-    flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    padding: 2rem;
-	max-width: 50%;
-	overflow-y: auto;
-    background-color: var(--branco);
+    align-items: center;
+    padding: 1rem;
 }
 
-/* Container do formulário */
-.form-container {
-	max-height: 10vh;
-	overflow-y: auto;
+.login-container {
     background: var(--branco);
-    padding: 2.5rem;
     border-radius: var(--borda-radius);
     box-shadow: var(--sombra);
     width: 100%;
-    max-width: 420px;
+    max-width: 450px;
+    padding: 2rem;
+    margin: 1rem;
 }
 
-.form-container h1 {
-    color: var(--verde-primario);
-    margin-bottom: 0.5rem;
-    font-size: 1.8rem;
-    font-weight: 600;
+.brand-header {
     text-align: center;
-}
-
-.subtitle {
-    color: var(--cinza-escuro);
     margin-bottom: 2rem;
-    font-size: 0.95rem;
-    text-align: center;
+}
+
+.brand-header .logo {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.brand-header h1 {
+    color: var(--verde-primario);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Sistema de abas */
+.tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cinza-medio);
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cinza-escuro);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    color: var(--verde-primario);
+    border-bottom-color: var(--verde-primario);
+}
+
+.tab-button:hover:not(.active) {
+    color: var(--verde-secundario);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 /* Elementos do formulário */
 .form-group {
     margin-bottom: 1.5rem;
-    position: relative;
 }
 
 .form-group label {
@@ -111,7 +114,6 @@
     text-decoration: underline;
 }
 
-/* Botão */
 button {
     width: 100%;
     padding: 1rem;
@@ -138,82 +140,18 @@ button:hover {
     display: none;
 }
 
-/* Estilos para o sistema de abas */
-.tabs {
-    display: flex;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--cinza-medio);
-    width: 100%;
-    max-width: 420px;
-}
-
-.tab-button {
-    padding: 0.75rem 1.5rem;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--cinza-escuro);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tab-button.active {
-    color: var(--verde-primario);
-    border-bottom-color: var(--verde-primario);
-}
-
-.tab-button:hover:not(.active) {
-    color: var(--verde-secundario);
-}
-
-.tab-content {
-    display: none;
-    width: 100%;
-    animation: fadeIn 0.3s ease;
-}
-
-.tab-content.active {
-    display: block;
-}
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsividade */
-@media (min-width: 768px) {
-    .left-panel {
-        display: block;
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
     }
     
-    .right-panel {
-        padding: 3rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .form-container {
-        padding: 3rem;
-    }
-    
-    .logo-overlay img {
-        max-width: 250px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .left-panel, .right-panel {
-        max-width: 100%;
-    }
-    
-    .left-panel {
-        height: 40vh; /* Reduz a altura da imagem em mobile */
-    }
-    
-    .right-panel {
-        height: 60vh;
+    .tab-button {
+        padding: 0.75rem 1rem;
     }
 }

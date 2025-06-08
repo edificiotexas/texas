@@ -7,62 +7,60 @@
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
-    <div class="split-screen">
-        <div class="left-panel">
-            <img src="img/Texas.png" alt="Edifício Texas" class="building-image">
+<body class="login-page">
+    <div class="login-container">
+        <div class="brand-header">
+            <img src="img/80texas.webp" alt="Logo Edifício Texas" class="logo">
+            <h1>Edifício Texas</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="mostrarLogin()">Login</button>
+            <button class="tab-button" onclick="mostrarRegistro()">Registro</button>
         </div>
         
-        <div class="right-panel">
-            <div class="tabs">
-                <button class="tab-button active" onclick="mostrarLogin()">Login</button>
-                <button class="tab-button" onclick="mostrarRegistro()">Registro</button>
-            </div>
+        <div class="tab-content active" id="loginForm">
+            <h2>Bem-vindo!</h2>
+            <p class="subtitle">Faça login para acessar sua conta</p>
             
-            <div class="tab-content active" id="loginForm">
-                <h1>Bem-vindo! <br>
-					Edifício Texas</h1>
-                <p class="subtitle">Faça login para acessar sua conta</p>
-                
-                <div class="form-group">
-                    <label for="login">Apartamento/Bloco</label>
-                    <input type="text" id="login" placeholder="Exemplo: 307B">
-                    <span id="aptoError" class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" placeholder="Digite sua senha">
-                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
-                </div>
-                <button onclick="fazerLogin()">Entrar</button>
+            <div class="form-group">
+                <label for="login">Apartamento/Bloco</label>
+                <input type="text" id="login" placeholder="Exemplo: 307B">
+                <span id="aptoError" class="error-message"></span>
             </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Digite sua senha">
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+            </div>
+            <button onclick="fazerLogin()">Entrar</button>
+        </div>
 
-            <div class="tab-content" id="registroForm">
-                <h1>Crie sua conta</h1>
-                <p class="subtitle">Registre-se para acessar os serviços</p>
-                
-                <div class="form-group">
-                    <label for="regNome">Nome Completo</label>
-                    <input type="text" id="regNome" placeholder="Seu nome completo">
-                </div>
-                <div class="form-group">
-                    <label for="regApto">Número do Apartamento</label>
-                    <input type="text" id="regApto" placeholder="Ex: 101">
-                </div>
-                <div class="form-group">
-                    <label for="regBloco">Bloco</label>
-                    <select id="regBloco">
-                        <option value="">Selecione o bloco</option>
-                        <option value="A">Bloco A</option>
-                        <option value="B">Bloco B</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="regSenha">Crie uma senha</label>
-                    <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres">
-                </div>
-                <button onclick="fazerRegistro()">Registrar</button>
+        <div class="tab-content" id="registroForm">
+            <h2>Crie sua conta</h2>
+            <p class="subtitle">Registre-se para acessar os serviços</p>
+            
+            <div class="form-group">
+                <label for="regNome">Nome Completo</label>
+                <input type="text" id="regNome" placeholder="Seu nome completo">
             </div>
+            <div class="form-group">
+                <label for="regApto">Número do Apartamento</label>
+                <input type="text" id="regApto" placeholder="Ex: 101">
+            </div>
+            <div class="form-group">
+                <label for="regBloco">Bloco</label>
+                <select id="regBloco">
+                    <option value="">Selecione o bloco</option>
+                    <option value="A">Bloco A</option>
+                    <option value="B">Bloco B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regSenha">Crie uma senha</label>
+                <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres">
+            </div>
+            <button onclick="fazerRegistro()">Registrar</button>
         </div>
     </div>
 

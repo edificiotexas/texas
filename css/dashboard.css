@@ -8,14 +8,33 @@
     box-shadow: var(--sombra);
 }
 
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-logo {
+    height: 40px;
+    filter: brightness(0) invert(1);
+}
+
 .header button {
     background-color: var(--branco);
-    color: var(--verde);
+    color: var(--verde-primario);
     border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border-radius: var(--borda-radius);
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
+
+.header button:hover {
+    background-color: var(--verde-claro);
+}
+
+/* Mantenha todos os outros estilos existentes do dashboard.css */
 
 .menu {
     display: flex;

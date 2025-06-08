@@ -1,6 +1,7 @@
 :root {
     --verde-primario: #2e7d32;
     --verde-secundario: #388e3c;
+    --verde-claro: #81c784;
     --branco: #ffffff;
     --cinza-claro: #f5f5f5;
     --cinza-medio: #e0e0e0;
@@ -9,50 +10,80 @@
     --borda-radius: 12px;
 }
 
-.login-page {
-    background: 
-        linear-gradient(135deg, rgba(46, 125, 50, 0.85) 0%, rgba(56, 142, 60, 0.85) 100%),
-        url('../img/Texas.webp') center/cover no-repeat;
+/* Layout Dividido */
+.split-screen {
+    display: flex;
     min-height: 100vh;
+    width: 100%;
+}
+
+.image-panel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.6) 0%, rgba(56, 142, 60, 0.4) 100%);
+    z-index: 1;
+}
+
+.building-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    transition: transform 0.5s ease;
+}
+
+.building-image:hover {
+    transform: scale(1.03);
+}
+
+.logo-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 80%;
+}
+
+.logo-overlay .logo {
+    max-height: 120px;
+    width: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.form-panel {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    position: relative;
+    background-color: var(--branco);
 }
 
-.login-container {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--borda-radius);
-    box-shadow: var(--sombra);
+.form-container {
     width: 100%;
-    max-width: 450px;
-    padding: 2.5rem;
-    position: relative;
-    z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
+    max-width: 420px;
+    padding: 1rem;
 }
 
-.brand-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.brand-header .logo {
-    height: 100px;
-    width: auto;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
-
-.brand-header h1 {
+.highlight {
     color: var(--verde-primario);
-    font-size: 1.8rem;
-    margin: 0;
     font-weight: 600;
 }
 
+/* Sistema de Abas */
 .tabs {
     display: flex;
     margin-bottom: 1.5rem;
@@ -80,6 +111,7 @@
     color: var(--verde-secundario);
 }
 
+/* Conteúdo dos Formulários */
 .tab-content {
     display: none;
     animation: fadeIn 0.3s ease;
@@ -89,6 +121,12 @@
     display: block;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Elementos do Formulário */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -157,23 +195,22 @@ button:hover {
     display: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-    .login-page {
-        padding: 1rem;
-        background-position: 60% center;
+/* Responsividade */
+@media (max-width: 1024px) {
+    .split-screen {
+        flex-direction: column;
     }
     
-    .login-container {
-        padding: 1.5rem;
+    .image-panel {
+        height: 40vh;
     }
     
-    .brand-header .logo {
-        height: 80px;
+    .form-panel {
+        padding: 2rem 1rem;
+    }
+    
+    .logo-overlay {
+        max-width: 100%;
     }
 }
 
@@ -183,7 +220,7 @@ button:hover {
         font-size: 0.9rem;
     }
     
-    .brand-header h1 {
-        font-size: 1.5rem;
+    .logo-overlay .logo {
+        max-height: 80px;
     }
 }

@@ -211,5 +211,22 @@
             ]);
         }
     </script>
+	<script>
+	    document.addEventListener('DOMContentLoaded', () => {
+	        const usuario = JSON.parse(localStorage.getItem('usuario'));
+	        
+	        if (usuario && usuario.isAdmin) {
+	            const navMenu = document.querySelector('.menu');
+	            if (navMenu) {
+	                const adminLink = document.createElement('a');
+	                adminLink.href = 'admin-agenda.html'; // Link para a página de gerenciamento
+	                adminLink.textContent = 'Gerenciar Agenda';
+	                adminLink.style.backgroundColor = '#d9534f'; // Destaque visual
+	                adminLink.style.color = 'white';
+	                navMenu.appendChild(adminLink);
+	            }
+	        }
+	    });
+	</script>
 </body>
 </html>

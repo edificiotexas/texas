@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Agenda - Admin</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .form-gerenciamento { background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .lista-gerenciamento .item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
+        .lista-gerenciamento .item-info { flex-grow: 1; }
+        .lista-gerenciamento .item-info p { margin: 0; }
+        .lista-gerenciamento .item-acoes button { margin-left: 10px; padding: 5px 10px; }
+        .btn-edit { background-color: #f0ad4e; }
+        .btn-delete { background-color: #d9534f; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Gerenciar Agenda de Eventos</h1>
+        <button onclick="window.location.href='index.html'">Voltar ao Início</button>
+    </header>
+
+    <main class="main-content">
+        <div class="form-gerenciamento">
+            <h3 id="formTitulo">Adicionar Novo Evento</h3>
+            <form id="formEvento">
+                <input type="hidden" id="eventoId">
+                <div class="form-group">
+                    <label for="titulo">Título do Evento</label>
+                    <input type="text" id="titulo" placeholder="Ex: Coleta de Lixo" required>
+                </div>
+                <div class="form-group">
+                    <label for="dias">Dias da Semana</label>
+                    <input type="text" id="dias" placeholder="Ex: Terças, quintas e sábados" required>
+                </div>
+                <div class="form-group">
+                    <label for="horario">Horário</label>
+                    <input type="text" id="horario" placeholder="Ex: A partir das 18:00" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <input type="text" id="categoria" placeholder="Ex: Serviços" required>
+                </div>
+                <button type="submit">Salvar Evento</button>
+                <button type="button" id="btnCancelar" style="display:none;">Cancelar Edição</button>
+            </form>
+        </div>
+
+        <div class="lista-gerenciamento">
+            <h2>Eventos Cadastrados</h2>
+            <div id="listaEventosAdmin">
+                <p>Carregando eventos...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin-agenda.js"></script>
+</body>
+</html>

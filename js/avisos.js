@@ -60,7 +60,7 @@ async function enviarAviso() {
             },
             body: JSON.stringify({
                 titulo,
-                conteudo,
+                mensagem,
                 autor: usuario.nome
             })
         });

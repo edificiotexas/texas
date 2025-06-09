@@ -25,19 +25,30 @@
 
     <main class="main-content">
         <h2>Bem-vindo, <span id="nomeUsuario"></span></h2>
+        
         <div class="cards">
+            
             <div class="card" onclick="window.location.href='avisos.html'">
-                <h3>Avisos</h3>
-                <p>Comunicados e avisos em geral.</p>
+                <h3>Último Aviso</h3>
+                <div id="widget-aviso-recente">
+                    <p>Carregando...</p>
+                </div>
             </div>
-            <div class="card" onclick="window.location.href='reserva-visitantes.html'">
-                <h3>Vagas para Visitantes</h3>
-                <p>Reserve vagas para seus visitantes.</p>
+
+            <div class="card" onclick="window.location.href='agenda.html'">
+                <h3>Sua Próxima Reserva</h3>
+                <div id="widget-proxima-reserva">
+                    <p>Carregando...</p>
+                </div>
             </div>
+
             <div class="card" onclick="window.location.href='moradores.html'">
-                <h3>Moradores</h3>
-                <p>Conheça seus vizinhos.</p>
+                <h3>Comunidade</h3>
+                <div id="widget-total-moradores">
+                     <p>Carregando...</p>
+                </div>
             </div>
+
             <div class="vaga-visitante-info">
                 <h3>Sua Vaga para Visitantes</h3>
                 <div id="vagaVisitanteInfo">
@@ -49,15 +60,28 @@
 
     <script src="js/auth.js"></script>
     <script>
-        // Verificar se está logado
-        const usuario = JSON.parse(localStorage.getItem('usuario'));
-        if (!usuario) {
-            window.location.href = 'login.html';
-        } else {
-            document.getElementById('nomeUsuario').textContent = usuario.nome;
-            carregarInfoVagaVisitante();
+        // Função para formatar data no padrão DD/MM/AAAA
+        function formatarData(dataString) {
+            const data = new Date(dataString);
+            // Adiciona o ajuste de fuso horário para evitar problemas de data
+            const dataAjustada = new Date(data.valueOf() + data.getTimezoneOffset() * 60000);
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            return dataAjustada.toLocaleDateString('pt-BR', options);
         }
 
+        // Função para formatar nome do espaço
+        function formatarEspaco(espaco) {
+            const espacos = {
+                salao: 'Salão de Festas',
+                churrasqueira: 'Churrasqueira',
+                piscina: 'Piscina'
+            };
+            return espacos[espaco] || espaco;
+        }
+
+        // --- CARREGAMENTO DOS WIDGETS ---
+
+        // 1. Carregar informações da vaga do visitante (código original)
         async function carregarInfoVagaVisitante() {
             try {
                 const apto = usuario.apartamento + usuario.bloco;
@@ -65,19 +89,22 @@
                 const vagas = await response.json();
                 
                 const hoje = new Date();
-                const vagaProxima = vagas.find(vaga => new Date(vaga.dataInicio) >= hoje) || vagas[0];
-                
+                // Encontra a vaga mais próxima a partir de hoje
+                const vagaProxima = vagas.sort((a, b) => new Date(a.dataInicio) - new Date(b.dataInicio))
+                                         .find(vaga => new Date(vaga.dataInicio) >= hoje);
+
                 const container = document.getElementById('vagaVisitanteInfo');
                 
                 if (vagaProxima) {
-                    const dataFormatada = new Date(vagaProxima.dataInicio).toLocaleDateString('pt-BR');
                     const vagaNumero = vagaProxima.vaga1 === apto ? '01' : '02';
+                    const dataInicio = new Date(vagaProxima.dataInicio);
+                    const hojeSemHora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
                     
                     container.innerHTML = `
                         <p class="vaga-disponivel">Você tem direito à vaga na semana ${vagaProxima.semana}</p>
-                        <p>Data de início: ${dataFormatada}</p>
+                        <p>Data de início: ${formatarData(vagaProxima.dataInicio)}</p>
                         <p>Vaga designada: ${vagaNumero}</p>
-                        ${new Date(vagaProxima.dataInicio) <= hoje ? 
+                        ${dataInicio <= hojeSemHora ? 
                             '<p class="vaga-disponivel">✅ Vaga disponível esta semana!</p>' : 
                             '<p class="vaga-indisponivel">⏳ Aguardando liberação</p>'}
                     `;
@@ -87,13 +114,101 @@
             } catch (error) {
                 console.error('Erro ao carregar info da vaga:', error);
                 document.getElementById('vagaVisitanteInfo').innerHTML = 
-                    '<p>Erro ao carregar informações da vaga. Tente novamente mais tarde.</p>';
+                    '<p>Erro ao carregar informações da vaga.</p>';
             }
         }
+
+        // 2. Carregar último aviso
+        async function carregarAvisoRecente() {
+            const container = document.getElementById('widget-aviso-recente');
+            try {
+                const response = await fetch('https://condominio-cc5u.onrender.com/api/avisos');
+                const avisos = await response.json();
+                if (avisos.length > 0) {
+                    const ultimoAviso = avisos[0]; // A API já retorna ordenado por data
+                    container.innerHTML = `
+                        <p><strong>${ultimoAviso.titulo}</strong></p>
+                        <small>Publicado em: ${formatarData(ultimoAviso.data)}</small>
+                    `;
+                } else {
+                    container.innerHTML = '<p>Nenhum aviso recente.</p>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar aviso recente:', error);
+                container.innerHTML = '<p>Não foi possível carregar o aviso.</p>';
+            }
+        }
+
+        // 3. Carregar próxima reserva do usuário
+        async function carregarProximaReserva() {
+            const container = document.getElementById('widget-proxima-reserva');
+            try {
+                // Supondo que a API /api/reservas retorne as reservas do usuário logado via token
+                const response = await fetch('https://condominio-cc5u.onrender.com/api/reservas', {
+                    headers: { 'Authorization': `Bearer ${usuario.token}` }
+                });
+                const reservas = await response.json();
+                const hoje = new Date();
+                hoje.setHours(0, 0, 0, 0);
+
+                const proximaReserva = reservas
+                    .filter(r => new Date(r.data) >= hoje && r.status === 'Confirmado')
+                    .sort((a, b) => new Date(a.data) - new Date(b.data))[0];
+
+                if (proximaReserva) {
+                    container.innerHTML = `
+                        <p><strong>${formatarEspaco(proximaReserva.espaco)}</strong></p>
+                        <p>${formatarData(proximaReserva.data)}</p>
+                        <small>Horário: ${proximaReserva.horario}</small>
+                    `;
+                } else {
+                    container.innerHTML = '<p>Você não possui reservas futuras.</p>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar próxima reserva:', error);
+                container.innerHTML = '<p>Não foi possível carregar suas reservas.</p>';
+            }
+        }
+
+        // 4. Carregar total de moradores
+        async function carregarTotalMoradores() {
+            const container = document.getElementById('widget-total-moradores');
+            try {
+                const response = await fetch('https://condominio-cc5u.onrender.com/api/moradores', {
+                    headers: { 'Authorization': `Bearer ${usuario.token}` }
+                });
+                const moradores = await response.json();
+                container.innerHTML = `
+                    <p style="font-size: 1.5rem; font-weight: bold;">${moradores.length}</p>
+                    <p>moradores cadastrados</p>
+                `;
+            } catch (error) {
+                console.error('Erro ao carregar total de moradores:', error);
+                container.innerHTML = '<p>Não foi possível carregar os dados.</p>';
+            }
+        }
+
+        // --- INICIALIZAÇÃO DA PÁGINA ---
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
 
         function sair() {
             localStorage.removeItem('usuario');
             window.location.href = 'login.html';
+        }
+
+        // Verificar se está logado e carregar todos os dados do dashboard
+        if (!usuario) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('nomeUsuario').textContent = usuario.nome;
+            
+            // Carrega todos os widgets em paralelo
+            Promise.all([
+                carregarInfoVagaVisitante(),
+                carregarAvisoRecente(),
+                carregarProximaReserva(),
+                carregarTotalMoradores()
+            ]);
         }
     </script>
 </body>

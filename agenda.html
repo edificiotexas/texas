@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda - Condomínio</title>
+    <title>Agenda de Eventos - Condomínio</title>
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .eventos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .evento-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .evento-card h3 {
+            margin-top: 0;
+            color: var(--verde-primario);
+        }
+        .evento-card p {
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
-        <h1>Agenda do Condomínio</h1>
+        <h1>Agenda de Eventos do Condomínio</h1>
         <button onclick="window.location.href='index.html'">Voltar</button>
     </header>
 
@@ -22,43 +43,10 @@
 
     <main class="main-content">
         <div class="agenda-container">
-            <h2>Reservas</h2>
+            <h2>Eventos e Serviços Recorrentes</h2>
             
-            <div class="nova-reserva">
-                <h3>Fazer Nova Reserva</h3>
-                <form id="formReserva">
-                    <div class="form-group">
-                        <label for="espaco">Espaço</label>
-                        <select id="espaco" required>
-                            <option value="">Selecione...</option>
-                            <option value="salao">Salão de Festas</option>
-                            <option value="churrasqueira">Churrasqueira</option>
-                            <option value="piscina">Piscina</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="data">Data</label>
-                        <input type="date" id="data" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="horario">Horário</label>
-                        <select id="horario" required>
-                            <option value="">Selecione...</option>
-                            <option value="08:00-10:00">08:00 - 10:00</option>
-                            <option value="10:00-12:00">10:00 - 12:00</option>
-                            <option value="14:00-16:00">14:00 - 16:00</option>
-                            <option value="16:00-18:00">16:00 - 18:00</option>
-                            <option value="19:00-22:00">19:00 - 22:00</option>
-                        </select>
-                    </div>
-                    <button type="submit">Reservar</button>
-                </form>
-            </div>
-
-            <div id="minhasReservas" class="lista-reservas">
-                <h3>Minhas Reservas</h3>
-                <!-- Reservas serão carregadas aqui via JavaScript -->
-                <p>Carregando reservas...</p>
+            <div id="listaEventos" class="eventos-container">
+                <p>Carregando agenda...</p>
             </div>
         </div>
     </main>

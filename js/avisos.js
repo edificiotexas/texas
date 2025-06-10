@@ -35,6 +35,7 @@ async function carregarAvisos() {
             avisoElement.innerHTML = `
                 <h3>${aviso.titulo}</h3>
                 <p class="data">${formatarData(aviso.data)}</p>
+                <p class="autor">Publicado por: ${aviso.autor}</p> <!-- Linha adicionada -->
                 <p class="mensagem">${aviso.mensagem}</p>
             `;
             listaAvisos.appendChild(avisoElement);

@@ -199,3 +199,10 @@ textarea {
 .status.cancelado {
     color: #e74c3c;
 }
+
+.aviso .autor {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}

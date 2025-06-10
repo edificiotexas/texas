@@ -76,26 +76,6 @@ async function fazerLogin() {
     }
 }
 
-// Verificar se o apartamento/bloco já está cadastrado
-async function verificarLoginExistente(apartamento, bloco) {
-    const login = apartamento + bloco;
-    
-    try {
-        const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/verificar-login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ login })
-        });
-        
-        return await response.json();
-    } catch (error) {
-        console.error('Erro ao verificar login:', error);
-        return { existe: false };
-    }
-}
-
 // Verificação em tempo real durante o registro
 function verificarLoginEmTempoReal() {
     const apartamento = document.getElementById('regApto').value;
@@ -116,6 +96,28 @@ function verificarLoginEmTempoReal() {
         errorElement.style.display = 'none';
     }
 }
+
+// Verificar se o apartamento/bloco já está cadastrado
+async function verificarLoginExistente(apartamento, bloco) {
+    const login = apartamento + bloco;
+    
+    try {
+        const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/verificar-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ login })
+        });
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Erro ao verificar login:', error);
+        return { existe: false };
+    }
+}
+
+
 
 // Função de registro
 async function fazerRegistro() {

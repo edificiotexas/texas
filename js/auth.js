@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializa mostrando o formulário de login
-    mostrarLogin();
-    
-    // Configura os event listeners para verificação em tempo real
-    document.getElementById('regApto').addEventListener('blur', verificarLoginEmTempoReal);
-    document.getElementById('regBloco').addEventListener('blur', verificarLoginEmTempoReal);
+    // Verifica se estamos na página de login/registro
+    if (document.getElementById('loginForm')) {
+        mostrarLogin();
+        
+        // Configura os event listeners apenas se os elementos existirem
+        const regApto = document.getElementById('regApto');
+        const regBloco = document.getElementById('regBloco');
+        if (regApto && regBloco) {
+            regApto.addEventListener('blur', verificarLoginEmTempoReal);
+            regBloco.addEventListener('blur', verificarLoginEmTempoReal);
+        }
+    }
 });
 
 // Alternar entre login e registro usando sistema de abas

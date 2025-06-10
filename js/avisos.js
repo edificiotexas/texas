@@ -80,8 +80,12 @@ async function enviarAviso() {
 
 function formatarData(dataString) {
     const data = new Date(dataString);
+	const offsetBrasil = -3 * 60;
+	const offsetLocal = data.getTimeZoneOffset;
+	const offsetDiff = offsetBrasil - offsetLocal;
+	data.setMinutes(data.getMinutes() + offsetDiff);
     const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); 
     const ano = data.getFullYear();
     const horas = String(data.getHours()).padStart(2, '0');
     const minutos = String(data.getMinutes()).padStart(2, '0');

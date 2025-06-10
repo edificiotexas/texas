@@ -132,38 +132,7 @@
             }
         }
 
-        // 3. Carregar próxima reserva do usuário
-        async function carregarProximaReserva() {
-            const container = document.getElementById('widget-proxima-reserva');
-            try {
-                // Supondo que a API /api/reservas retorne as reservas do usuário logado via token
-                const response = await fetch('https://condominio-cc5u.onrender.com/api/reservas', {
-                    headers: { 'Authorization': `Bearer ${usuario.token}` }
-                });
-                const reservas = await response.json();
-                const hoje = new Date();
-                hoje.setHours(0, 0, 0, 0);
-
-                const proximaReserva = reservas
-                    .filter(r => new Date(r.data) >= hoje && r.status === 'Confirmado')
-                    .sort((a, b) => new Date(a.data) - new Date(b.data))[0];
-
-                if (proximaReserva) {
-                    container.innerHTML = `
-                        <p><strong>${formatarEspaco(proximaReserva.espaco)}</strong></p>
-                        <p>${formatarData(proximaReserva.data)}</p>
-                        <small>Horário: ${proximaReserva.horario}</small>
-                    `;
-                } else {
-                    container.innerHTML = '<p>Você não possui reservas futuras.</p>';
-                }
-            } catch (error) {
-                console.error('Erro ao carregar próxima reserva:', error);
-                container.innerHTML = '<p>Não foi possível carregar suas reservas.</p>';
-            }
-        }
-
-        // 4. Carregar total de moradores
+        // 3. Carregar total de moradores
         async function carregarTotalMoradores() {
             const container = document.getElementById('widget-total-moradores');
             try {

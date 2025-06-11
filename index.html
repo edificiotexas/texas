@@ -110,10 +110,10 @@
 		        if (vagaAtual) {
 		            const vagaNumero = vagaAtual.vaga1 === apto ? '01' : '02';
 		            container.innerHTML = `
-		                <p class="vaga-disponivel">✅ VAGA DISPONÍVEL ESTA SEMANA!</p>
-		                <p>Semana: ${vagaAtual.semana}</p>
-		                <p>Período: ${formatarData(vagaAtual.dataInicio)} a ${formatarData(new Date(new Date(vagaAtual.dataInicio).setDate(new Date(vagaAtual.dataInicio).getDate() + 6))}</p>
-		                <p>Vaga designada: ${vagaNumero}</p>
+					<p class="vaga-disponivel">✅ VAGA DISPONÍVEL ESTA SEMANA!</p>
+					    <p>Semana: ${vagaAtual.semana}</p>
+					    <p>Período: ${formatarData(vagaAtual.dataInicio)} a ${formatarData(new Date(new Date(vagaAtual.dataInicio).setDate(new Date(vagaAtual.dataInicio).getDate() + 6)))}</p>
+					    <p>Vaga designada: ${vagaNumero}</p>
 		                
 		            `;
 		        } else if (vagaProxima) {

@@ -16,12 +16,13 @@
         <button onclick="sair()">Sair</button>
     </header>
 
-    <nav class="menu">
-        <a href="index.html" class="active">Início</a>
-        <a href="avisos.html">Avisos</a>
-        <a href="agenda.html">Agenda</a>
-        <a href="moradores.html">Moradores</a>
-    </nav>
+	<nav class="menu">
+	    <a href="index.html">Início</a>
+	    <a href="avisos.html">Avisos</a>
+	    <a href="agenda.html">Agenda</a>
+	    <a href="moradores.html">Moradores</a>
+	    <a href="vagas-visitantes.html">Vagas Visitantes</a>
+	</nav>
 
     <main class="main-content">
         <h2>Bem-vindo, <span id="nomeUsuario"></span></h2>
@@ -75,41 +76,66 @@
         // --- CARREGAMENTO DOS WIDGETS ---
 
         // 1. Carregar informações da vaga do visitante (código original)
-        async function carregarInfoVagaVisitante() {
-            try {
-                const apto = usuario.apartamento + usuario.bloco;
-                const response = await fetch(`https://condominio-cc5u.onrender.com/api/vagas-visitantes/por-apartamento/${apto}`);
-                const vagas = await response.json();
-                
-                const hoje = new Date();
-                // Encontra a vaga mais próxima a partir de hoje
-                const vagaProxima = vagas.sort((a, b) => new Date(a.dataInicio) - new Date(b.dataInicio))
-                                         .find(vaga => new Date(vaga.dataInicio) >= hoje);
+		async function carregarInfoVagaVisitante() {
+		    try {
+		        const apto = usuario.apartamento + usuario.bloco;
+		        const response = await fetch(`https://condominio-cc5u.onrender.com/api/vagas-visitantes/por-apartamento/${apto}`);
+		        const vagas = await response.json();
+		        
+		        const hoje = new Date();
+		        hoje.setHours(0, 0, 0, 0); // Remove a parte de horas para comparação
+		        
+		        // Encontra todas as vagas válidas (passadas e futuras)
+		        const vagasValidas = vagas.sort((a, b) => new Date(a.dataInicio) - new Date(b.dataInicio));
+		        
+		        // Encontra a vaga atual ou próxima
+		        let vagaAtual = null;
+		        let vagaProxima = null;
+		        
+		        for (const vaga of vagasValidas) {
+		            const dataInicio = new Date(vaga.dataInicio);
+		            const dataFim = new Date(dataInicio);
+		            dataFim.setDate(dataFim.getDate() + 6); // +6 dias = semana completa
+		            
+		            if (hoje >= dataInicio && hoje <= dataFim) {
+		                vagaAtual = vaga;
+		                break;
+		            } else if (hoje < dataInicio && !vagaProxima) {
+		                vagaProxima = vaga;
+		            }
+		        }
 
-                const container = document.getElementById('vagaVisitanteInfo');
-                
-                if (vagaProxima) {
-                    const vagaNumero = vagaProxima.vaga1 === apto ? '01' : '02';
-                    const dataInicio = new Date(vagaProxima.dataInicio);
-                    const hojeSemHora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
-                    
-                    container.innerHTML = `
-                        <p class="vaga-disponivel">Você tem direito à vaga na semana ${vagaProxima.semana}</p>
-                        <p>Data de início: ${formatarData(vagaProxima.dataInicio)}</p>
-                        <p>Vaga designada: ${vagaNumero}</p>
-                        ${dataInicio <= hojeSemHora ? 
-                            '<p class="vaga-disponivel">✅ Vaga disponível esta semana!</p>' : 
-                            '<p class="vaga-indisponivel">⏳ Aguardando liberação</p>'}
-                    `;
-                } else {
-                    container.innerHTML = '<p class="vaga-indisponivel">Não há vagas programadas para seu apartamento.</p>';
-                }
-            } catch (error) {
-                console.error('Erro ao carregar info da vaga:', error);
-                document.getElementById('vagaVisitanteInfo').innerHTML = 
-                    '<p>Erro ao carregar informações da vaga.</p>';
-            }
-        }
+		        const container = document.getElementById('vagaVisitanteInfo');
+		        
+		        if (vagaAtual) {
+		            const vagaNumero = vagaAtual.vaga1 === apto ? '01' : '02';
+		            container.innerHTML = `
+		                <p class="vaga-disponivel">✅ VAGA DISPONÍVEL ESTA SEMANA!</p>
+		                <p>Semana: ${vagaAtual.semana}</p>
+		                <p>Período: ${formatarData(vagaAtual.dataInicio)} a ${formatarData(new Date(new Date(vagaAtual.dataInicio).setDate(new Date(vagaAtual.dataInicio).getDate() + 6))}</p>
+		                <p>Vaga designada: ${vagaNumero}</p>
+		                
+		            `;
+		        } else if (vagaProxima) {
+		            const vagaNumero = vagaProxima.vaga1 === apto ? '01' : '02';
+		            const diasRestantes = Math.ceil((new Date(vagaProxima.dataInicio) - hoje) / (1000 * 60 * 60 * 24));
+		            
+		            container.innerHTML = `
+		                <p class="vaga-indisponivel">⏳ PRÓXIMA VAGA</p>
+		                <p>Semana: ${vagaProxima.semana}</p>
+		                <p>Início: ${formatarData(vagaProxima.dataInicio)}</p>
+		                <p>Vaga designada: ${vagaNumero}</p>
+		                <p class="destaque">Faltam ${diasRestantes} dias</p>
+		            `;
+		        } else {
+		            container.innerHTML = '<p class="vaga-indisponivel">Não há vagas programadas para seu apartamento.</p>';
+		        }
+		    } catch (error) {
+		        console.error('Erro ao carregar info da vaga:', error);
+		        document.getElementById('vagaVisitanteInfo').innerHTML = 
+		            '<p>Erro ao carregar informações da vaga.</p>';
+		    }
+		}
 
         // 2. Carregar último aviso
         async function carregarAvisoRecente() {

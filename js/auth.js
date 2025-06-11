@@ -78,7 +78,7 @@ async function fazerLogin() {
 
 // Verificação em tempo real durante o registro
 function verificarLoginEmTempoReal() {
-    const apartamento = document.getElementById('regApto').value;
+    const apartamento = document.getElementById('regApto').value.trim();
     const bloco = document.getElementById('regBloco').value;
     const errorElement = document.getElementById('aptoError');
     
@@ -86,11 +86,17 @@ function verificarLoginEmTempoReal() {
         verificarLoginExistente(apartamento, bloco)
             .then(verificacao => {
                 if (verificacao.existe) {
-                    errorElement.textContent = 'Este apartamento/bloco já está cadastrado!';
+                    errorElement.textContent = '⚠️ Já existe um morador cadastrado com este apartamento e bloco!';
                     errorElement.style.display = 'block';
+                    errorElement.style.color = '#d9534f';
                 } else {
-                    errorElement.style.display = 'none';
+                    errorElement.textContent = '✓ Disponível';
+                    errorElement.style.display = 'block';
+                    errorElement.style.color = '#5cb85c';
                 }
+            })
+            .catch(error => {
+                errorElement.style.display = 'none';
             });
     } else {
         errorElement.style.display = 'none';
@@ -137,22 +143,27 @@ async function fazerRegistro() {
         return;
     }
     
-    // Verificar se o login já existe
-    const verificacao = await verificarLoginExistente(apartamento, bloco);
-    
-    if (verificacao.existe) {
-        alert('Já existe um morador cadastrado com este apartamento/bloco!');
-        return;
-    }
-
-    const usuario = {
-        nome: nome,
-        apartamento: apartamento,
-        bloco: bloco,
-        senha: senha
-    };
+    // Mostrar loading
+    const btnRegistrar = document.querySelector('#registroForm button');
+    btnRegistrar.disabled = true;
+    btnRegistrar.textContent = 'Registrando...';
     
     try {
+        // Verificar se o login já existe
+        const verificacao = await verificarLoginExistente(apartamento, bloco);
+        
+        if (verificacao.existe) {
+            alert('Já existe um morador cadastrado com este apartamento e bloco. Por favor, verifique os dados ou entre em contato com o síndico.');
+            return;
+        }
+
+        const usuario = {
+            nome: nome,
+            apartamento: apartamento,
+            bloco: bloco,
+            senha: senha
+        };
+        
         const response = await fetch('https://condominio-cc5u.onrender.com/api/auth/cadastrar', {
             method: 'POST',
             headers: {
@@ -161,16 +172,23 @@ async function fazerRegistro() {
             body: JSON.stringify(usuario)
         });
         
-        const data = await response.json();
-        
-        if (response.ok) {
-            alert('Registro realizado com sucesso!');
-            mostrarLogin(); // Volta para a aba de login após registro
-        } else {
-            alert(data.message || 'Erro no registro');
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro no registro');
         }
+        
+        alert('Registro realizado com sucesso! Seu login é: ' + apartamento + bloco);
+        mostrarLogin(); // Volta para a aba de login após registro
     } catch (error) {
-        alert('Erro ao conectar com o servidor');
+        if (error.message.includes('Já existe um morador')) {
+            alert('Erro: ' + error.message);
+        } else {
+            alert('Erro ao cadastrar: ' + error.message);
+        }
         console.error(error);
+    } finally {
+        // Restaurar botão
+        btnRegistrar.disabled = false;
+        btnRegistrar.textContent = 'Registrar';
     }
 }

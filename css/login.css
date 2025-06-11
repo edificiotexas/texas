@@ -180,10 +180,15 @@ button:hover {
 }
 
 .error-message {
-    color: #d32f2f;
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
     display: none;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.error-message::before {
+    margin-right: 0.3rem;
 }
 
 /* Responsividade */
